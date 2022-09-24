@@ -3,10 +3,6 @@ library(fect)
 library(xtable)
 source("Scripts/tablasgsynth.R")
 
-library(showtext)
-font_add_google("Open Sans", "Open Sans")
-showtext_auto()
-
 
 #Plot dimensions
 ancho = 12.35
@@ -20,7 +16,6 @@ g <- plot(placebo_homicide,
           ylab = "Effect on homicide rate",
           cex.text = 0.6, cex.axis = 0.6, 
           cex.lab = 0.8) +
-  theme(text = element_text(family = "Open Sans")) +
   ggtitle(NULL)
 
   ggsave(g, file = "plots/figure_D_1.pdf", height = alto, width = ancho, units = "cm")
@@ -31,7 +26,6 @@ grupos <- c("sin", "1mas")
 
 for(i in seq_along(grupos)){
   g <- plot(placebo_groups[[i]], main = "", theme.bw = TRUE, shade.post = FALSE, stats = c("placebo.p","equiv.p"), ylab = "Effect on homicide rate", cex.text = 0.6, cex.axis = 0.6, cex.lab = 0.8) +
-    theme(text = element_text(family = "Open Sans")) +
     ggtitle(NULL)
   
     ggsave(g, file = paste0("plots/figure_D_", i + 3,".pdf"), height = alto, width = ancho, units = "cm")
@@ -55,7 +49,6 @@ for(i in seq_along(delitos)){
               cex.axis = 0.6, 
               cex.lab = 0.8, 
               stats.pos = c(-13,-0.3)) +
-      theme(text = element_text(family = "Open Sans")) +
       ggtitle(NULL)
     
   }  else {
@@ -64,7 +57,6 @@ for(i in seq_along(delitos)){
                     cex.text = 0.6, 
                     cex.axis = 0.6, 
                     cex.lab = 0.8) +
-      theme(text = element_text(family = "Open Sans")) +
       ggtitle(NULL)
   }
     ggsave(g, file = figures[i], height = alto, width = ancho, units = "cm")
@@ -81,7 +73,6 @@ figures <- c("plots/figure_F_3.pdf",
 
 for(i in seq_along(delitos)){
   g <- plot(placebo_celerity[[i]], main = "", theme.bw = TRUE, shade.post = FALSE, stats = c("placebo.p","equiv.p"), ylab = "Effect on elapsed time until sentence", cex.text = 0.6, cex.axis = 0.6, cex.lab = 0.8, stats.pos = c(-10,-200)) +
-    theme(text = element_text(family = "Open Sans")) +
     ggtitle(NULL)
   
     ggsave(g, file = figures[i], height = alto, width = ancho, units = "cm")
@@ -91,7 +82,6 @@ for(i in seq_along(delitos)){
 load("models/indictments_placebo.RData")
 
 g <- plot(indictments_placebo, theme.bw = TRUE, main = "", shade.post = FALSE, stats = c("placebo.p","equiv.p"), ylab = "Effect on indictments", cex.text = 0.6, cex.axis = 0.6, cex.lab = 0.8, stats.pos = c(-130,-20)) +
-  theme(text = element_text(family = "Open Sans")) +
   ggtitle(NULL)
 
 ggsave(g, file = "plots/figure_B_2.pdf", device = "pdf", height = alto, width = ancho, units = "cm")
@@ -100,13 +90,11 @@ ggsave(g, file = "plots/figure_B_2.pdf", device = "pdf", height = alto, width = 
 load(file = "models/punishment_rate.RData")
 
 g <- plot(punishment_rate_placebo[[1]], main = "", theme.bw = TRUE, shade.post = FALSE, stats = c("placebo.p","equiv.p"), ylab = "Effect on indictments", cex.text = 0.6, cex.axis = 0.6, cex.lab = 0.8) +
-  theme(text = element_text(family = "Open Sans")) +
   ggtitle(NULL)
 
   ggsave(g, file = "plots/figure_C_3.pdf", device = "pdf", height = alto, width = ancho, units = "cm")
 
 g <- plot(punishment_rate_placebo[[2]], theme.bw = TRUE, shade.post = FALSE, stats = c("placebo.p","equiv.p"), ylab = "Effect on indictments", cex.text = 0.6, cex.axis = 0.6, cex.lab = 0.8) +
-  theme(text = element_text(family = "Open Sans")) +
   ggtitle(NULL)
 
   ggsave(g, file = "plots/figure_C_4.pdf", device = "pdf", height = alto, width = ancho, units = "cm")

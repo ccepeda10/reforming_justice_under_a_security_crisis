@@ -4,12 +4,10 @@ set.seed(21012022)
 require(tidyverse)
 require(gsynth)
 require(xtable)
-library(showtext)
+
 
 source("scripts/tablasgsynth.R")
 
-font_add_google("Open Sans", "Open Sans")
-showtext_auto()
 
 # Graph height and width
 ancho = 12.35
@@ -57,27 +55,22 @@ control_celerity_pretrial <- c("Violent encounters involving military personnel"
 load("models/homicide_gsynth.RData")
 
 g <- plot(homicide_gsynth, type = "counterfactual", theme.bw = TRUE, shade.post = FALSE) +
-  theme(text = element_text(family = "Open Sans")) +
   ggtitle(NULL)
 
   ggsave(g, file = "plots/figure_3_a.pdf", device = "pdf", height = alto, width = ancho, units = "cm")
   
 g <- plot(homicide_gsynth, theme.bw = TRUE, main = "") +
-  theme(text = element_text(family = "Open Sans")) +
   ggtitle(NULL)
 
   ggsave(g, file = "plots/figure_3_b.pdf", device = "pdf", height = alto, width = ancho, units = "cm")
 
 if ( ifelse(length(homicide_gsynth$r.cv) == 0,0,homicide_gsynth$r.cv) != 0) {
   g <- plot(homicide_gsynth_mc, type = "factors", theme.bw = TRUE, main = "") +
-    theme(text = element_text(family = "Open Sans")) +
     ggtitle(NULL)
   
     ggsave(g, file = "plots/homicide_factors.pdf", device = "pdf", height = alto, width = ancho, units = "cm")
   
-  g <- plot(homicide_gsynth, type = "loadings", theme.bw = TRUE, main = "") +
-    theme(text = element_text(family = "Open Sans")) +
-    ggtitle(NULL)
+  g <- plot(homicide_gsynth, type = "loadings", theme.bw = TRUE, main = "")
   
     ggsave(g, file = "plots/homicide_loadings.pdf", device = "pdf", height = alto, width = ancho, units = "cm")
 }
@@ -107,13 +100,11 @@ names(groups_gsynth) <- groups
 
 for(i in seq_along(groups_gsynth)){
   g <- plot(groups_gsynth[[i]], type = "counterfactual", theme.bw = TRUE, shade.post = FALSE) +
-    theme(text = element_text(family = "Open Sans")) +
     ggtitle(NULL)
   
     ggsave(g, file = paste0("plots/figure_D_", i + 1, "_a.pdf"), height = alto, width = ancho, units = "cm")
   
   g <- plot(groups_gsynth[[i]], theme.bw = TRUE) +
-    theme(text = element_text(family = "Open Sans")) +
     labs(subtitle = "Homicide rate")  +
     ggtitle(NULL)
   
@@ -180,13 +171,11 @@ appendix_betas <- c("tables/table_E_2.tex",
 for (i in seq_along(delitos)) {
   
   g <- plot(pretrial_gsynth[[i]], type = "counterfactual", theme.bw = TRUE, shade.post = FALSE) +
-    theme(text = element_text(family = "Open Sans")) +
     ggtitle(NULL)
   
     ggsave(g, file = paste0("plots/figure_",i+3,"_a.pdf"), device = "pdf", height = alto, width = ancho, units = "cm")
   
   g <- plot(pretrial_gsynth[[i]], theme.bw = TRUE) +
-    theme(text = element_text(family = "Open Sans")) +
     ggtitle(NULL)
   
     ggsave(g, file = paste0("plots/figure_",i+3,"_b.pdf"), device = "pdf", height = alto, width = ancho, units = "cm")
@@ -194,16 +183,13 @@ for (i in seq_along(delitos)) {
   
   if (ifelse(length(pretrial_gsynth[[i]]$r.cv) == 0,0,pretrial_gsynth[[i]]$r.cv) != 0) {
     g <- plot(pretrial_gsynth[[i]], type = "factors", theme.bw = TRUE, main = "") +
-      theme(text = element_text(family = "Open Sans")) +
       xlab("Year") +
       ggtitle(NULL)
     
       ggsave(g, file = figures_factors[i] , device = "pdf", height = alto, width = ancho, units = "cm")
       
     
-    plot(x = pretrial_gsynth[[i]], type = "loadings", theme.bw = TRUE, main = "") +
-      theme(text = element_text(family = "Open Sans")) +
-      ggtitle(NULL)
+    plot(x = pretrial_gsynth[[i]], type = "loadings", theme.bw = TRUE, main = "")
     
       ggsave(file = figures_loadings[i], device = "pdf", height = alto, width = ancho, units = "cm")
   }
@@ -265,28 +251,23 @@ appendix_betas <- c("tables/table_F_2.tex",
 
 for (i in seq_along(celerity_gsynth)) {
   g <- plot(celerity_gsynth[[i]], type = "counterfactual", theme.bw = TRUE, shade.post = FALSE) +
-    theme(text = element_text(family = "Open Sans")) +
     ggtitle(NULL)
   
     ggsave(g, file = paste0("plots/figure_",i + 8,"_a.pdf"), device = "pdf", height = alto, width = ancho, units = "cm")
   
   g <- plot(celerity_gsynth[[i]], theme.bw = TRUE) +
-    theme(text = element_text(family = "Open Sans")) +
     ggtitle(NULL)
   
     ggsave(g, file = paste0("plots/figure_",i + 8,"_b.pdf"), device = "pdf", height = alto, width = ancho, units = "cm")
   
   if (ifelse(length(celerity_gsynth[[i]]$r.cv) == 0,0,celerity_gsynth[[i]]$r.cv) != 0) {
     g <- plot(celerity_gsynth[[i]], type = "factors", theme.bw = TRUE) +
-      theme(text = element_text(family = "Open Sans")) +
       xlab("Year") +
       ggtitle(NULL)
     
       ggsave(g, file = figures_factors[i], device = "pdf", height = alto, width = ancho, units = "cm")
     
-      plot(x = celerity_gsynth[[i]], type = "loadings", theme.bw = TRUE, main = "") +
-        theme(text = element_text(family = "Open Sans")) +
-        ggtitle(NULL)
+      plot(x = celerity_gsynth[[i]], type = "loadings", theme.bw = TRUE, main = "")
       
       ggsave(file = figures_loadings[i], device = "pdf", height = alto, width = ancho, units = "cm")
   }
@@ -322,15 +303,11 @@ tabla_gsynth(celerity_gsynth, r = 0) %>%
 load("models/indictments_gsynth.RData")
 
 g <- plot(indictments_gsynth, theme.bw = TRUE, type = "counterfactual") +
-  theme(text = element_text(family = "Open Sans")) +
   ggtitle(NULL)
 
-ggsave(g, file = "plots/figure_B_1_a.pdf", device = "pdf", height = alto, width = ancho, units = "cm") +
-  theme(text = element_text(family = "Open Sans")) +
-  ggtitle(NULL)
+ggsave(g, file = "plots/figure_B_1_a.pdf", device = "pdf", height = alto, width = ancho, units = "cm")
 
 g <- plot(indictments_gsynth, theme.bw = TRUE) +
-  theme(text = element_text(family = "Open Sans")) +
   ggtitle(NULL)
 
 hacer_tabla_1(indictments_gsynth, "indictments", z = "tables/table_B_1.tex")
@@ -341,13 +318,11 @@ names(punishment_rate_gsynth) <- groups
 
 for(i in 1:2){
   g <- plot(punishment_rate_gsynth[[i]], type = "counterfactual", theme.bw = TRUE, shade.post = FALSE) +
-      theme(text = element_text(family = "Open Sans")) +
       ggtitle(NULL)
     
    ggsave(g, file = paste0("plots/figure_C_",i,"_a.pdf"), device = "pdf", height = alto, width = ancho, units = "cm")
 
    g <- plot(punishment_rate_gsynth[[i]], theme.bw = TRUE, shade.post = FALSE)+
-      theme(text = element_text(family = "Open Sans")) +
       ggtitle(NULL)
     
    ggsave(g, file = paste0("plots/figure_C_",i,"_b.pdf"), device = "pdf", height = alto, width = ancho, units = "cm")

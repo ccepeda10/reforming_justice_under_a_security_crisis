@@ -1,6 +1,5 @@
 library(tidyverse)
 library(haven)
-library(showtext)
 library(importinegi)
 library(sf)
 library(rgeos)
@@ -8,9 +7,6 @@ library(rgeos)
 # We load the list of removed treatment units that had less than 7 preperiods
 load("data/less_7_preperiods.RData")
 `%notin%` <- Negate(`%in%`)
-
-font_add_google("Open Sans", "Open Sans")
-showtext_auto()
 
 homicide <- read_stata(file = "data/panel_tasa_homicidios.dta")
 
@@ -38,8 +34,7 @@ m <- ggplot() +
   scale_fill_manual(values = c("white", paste0("grey",16:4*5))) +
   geom_sf(data = map_ent, alpha = 0.25, fill = NA, size = 0.15, color = "black") +
   theme_void() +
-  theme(text = element_text(family = "Open Sans"),
-        plot.margin=grid::unit(c(0,0,0,0), "mm")) +
+  theme(plot.margin=grid::unit(c(0,0,0,0), "mm")) +
   labs(fill = "Year")
 
 ggsave(plot =  m,
@@ -58,7 +53,6 @@ load(file = "data/tasa_homicidio_nacional.RData")
 g0 <- ggplot(tasa_nacional) +
   geom_line(aes(year,tasa_nacional), color = "black") +
   theme_light() +
-  theme(text = element_text(family = "Open Sans")) +
   ylab("Homicide rate") +
   xlab("Year")
 
@@ -87,7 +81,6 @@ g1 <- ggplot(homicide_rate_plot) +
   geom_line(aes(year,mean_murder_rate,col = tcgroup)) +
   theme_light() +
   scale_color_manual(values = c("black","darkgray")) +
-  theme(text = element_text(family = "Open Sans")) +
   ylab("Mean homicide rate") +
   xlab("Year") +
   labs(col = "Group")
