@@ -1,3 +1,17 @@
+## Packages -----
+library(haven)
+library(tidyverse)
+library(lubridate)
+library(gsynth)
+library(fect)
+library(xtable)
+library(haven)
+library(foreign)
+library(importinegi)
+library(sf)
+library(rgeos)
+
+
 # Models and placebo tests
 source("scripts/homicide_pretrial_celerity.R", encoding = "utf-8")
 source("scripts/homicide_pretrial_celerity_placebos.R", encoding = "utf-8")
